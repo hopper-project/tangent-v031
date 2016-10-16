@@ -325,7 +325,7 @@ class Doc : public TupleCB {
     for (std::map<tokentuple,int>::const_iterator it=ttm.begin(); it!=ttm.end(); it++) { 
         lexTokenTuples.add(it->first, it->second, exprID); 
         if (VERBOSE) { 
-            cerr << orig_docID << ","< <(it->first) << ","; 
+            cerr << orig_docID << "\t" << (it->first) << "\t"; 
             dumptuple(cerr,it->first);     
             cerr <<endl; 
         }
