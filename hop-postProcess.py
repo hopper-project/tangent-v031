@@ -31,7 +31,7 @@ def main():
         os.makedirs(odir)
     
     for eq in eq_numbers:
-        eq_dir = os.path.join(odir, re.search('(.*)\..*\.', eq).group(1))
+        eq_dir = os.path.join(odir, re.search('(.*)\..*\.', eq).group(1),re.search('(.*\.*)\..*', eq).group(1))
         if not os.path.exists(eq_dir):
             os.makedirs(eq_dir)
         with open(os.path.join(eq_dir, eq + '.tpl'), 'w') as of:
