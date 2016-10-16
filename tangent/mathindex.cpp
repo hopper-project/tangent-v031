@@ -322,17 +322,30 @@ class Query : public TupleCB {
 class Doc : public TupleCB {
   std::map<tokentuple,int> ttm; // {tokentuple,count}
   void doFinishExpr() {
-    for (std::map<tokentuple,int>::const_iterator it=ttm.begin(); it!=ttm.end(); it++) { lexTokenTuples.add(it->first, it->second, exprID); }
+    for (std::map<tokentuple,int>::const_iterator it=ttm.begin(); it!=ttm.end(); it++) { 
+        lexTokenTuples.add(it->first, it->second, exprID); 
+        if (VERBOSE) { 
+            cerr << orig_docID << ","< <(it->first) << ","; 
+            dumptuple(cerr,it->first);     
+            cerr <<endl; 
+        }
+    }
     ttm.clear();
   }
  public:
   llong st; // process creation time
-  bool active; int docID; int exprID; bool isNewExpr;
+  bool active; int docID; int exprID; bool isNewExpr; string orig_docID;
   void reset() { active=false; docID=-1; exprID=-1; isNewExpr=false; ttm.clear(); }
   Doc() { reset(); st=nanoTime(); }
   void timest() { st=nanoTime(); }
   Doc& time(ostream& out) { if (active) { out<<"I\tit\t"<<(double)(nanoTime()-st)/1000000<<endl; } return *this; }
-  void start(string id) { int t=dictDocIDs.add(id); WARNR(t!=dictDocIDs.size()-1,"Repeated docID",id); docID=t; active=true; }
+  void start(string id) { 
+      int t=dictDocIDs.add(id); 
+      WARNR(t!=dictDocIDs.size()-1,"Repeated docID",id); 
+      docID=t; 
+      active=true; 
+      orig_docID = id;
+  }
   void expression(string ex, string pos) { if (!active) return;
     doFinishExpr();
     WARNR(docID<0,"No docID",ex<<" "<<pos);
