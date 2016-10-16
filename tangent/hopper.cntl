@@ -1,0 +1,5 @@
+cntl	hopper.cntl
+window	4
+doc_list	dlmf/eq-paths.txt
+database	dlmf
+chunk_size	5
