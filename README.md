@@ -11,4 +11,4 @@ First, perform the following steps:
 3. In the config file named `hopper.cntl`, change the `doc_list` line to point to the `$EQ-PATHS-FILE` you created above. 
 4. From the tangent directory, run `python3 index.py hopper.cntl` to create a database of symbol layout trees (SLTs). These trees will be written to `tangent/db-index/`. 
 5. Write the tuples for all of the SLTs to a file `$ALL-TUPLES`. From the `tangent` directory, run: `cat db-index/* | ./mathindex.exe -v 2> $ALL-TUPLES`
-6. **(DLMF-only)** Organize the tuples into the original directory structure, with 1 directory per chapter, and 1 file per equation. Assume you want all chapters directories in `$DLMF-TUPLE-DIR` From the top-evel tangent-v031 directory: `python hop-postProcess.py --eq_paths $EQ-PATHS-FILE --all_tuples $ALL-TUPLES --outdir t$DLMF-TUPLE-DIR`
+6. **(DLMF-only)** Organize the tuples into the original directory structure, with 1 directory per chapter, and 1 file per equation. Assume you want all chapters directories in `$DLMF-TUPLE-DIR` From the top-evel tangent-v031 directory: `python hop-postProcess.py --eq_paths $EQ-PATHS-FILE --all_tuples $ALL-TUPLES --outdir $DLMF-TUPLE-DIR`
